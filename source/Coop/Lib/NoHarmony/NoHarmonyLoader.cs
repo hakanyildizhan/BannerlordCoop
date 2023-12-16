@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Medallion.Threading.FileSystem;
+using Medallion.Threading;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.Core;
@@ -75,7 +75,7 @@ namespace Coop.Lib.NoHarmony
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
-            var myLock = new FileDistributedLock(new FileInfo("HarmonyGlobalMutex"));
+            SystemDistributedLock myLock = new SystemDistributedLock("HarmonyGlobalMutex");
             using (myLock.Acquire())
             {
                 NoHarmonyInit();
